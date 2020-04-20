@@ -1,37 +1,39 @@
 import React, {Component} from 'react';
 
-class Equipe extends Component{
-        render(){
-            return(
-            <div>
-                <Sobre nome={this.props.nome} cargo={this.props.cargo}
-                idade={this.props.idade} />
-            </div>
-            );
-        }
+class App extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            nome: 'Ronaldo',
+            contador: 0
+        };
+        this.aumentar = this.aumentar.bind(this);
+        this.diminuir = this.diminuir.bind(this);
 }
 
-class Sobre extends Component{
-    render(){
-        return(
-            <div>
-                <h2> Olá sou o {this.props.nome} </h2>
-                <h3>Cargo: {this.props.nome}</h3>
-                <h3>Idade: {this.props.idade}</h3>
-                <hr />
-            </div>
-        )
-    }
+aumentar(){
+    let state = this.state;
+    state.contador += 1;
+    this.setState(state);
 }
 
-function App(){
+diminuir(){
+    let state = this.state;
+    state.contador -= 1;
+    this.setState(state);
+}
+
+render(){
     return(
-       <div>
-           <h1> Conheça nossa equipe:</h1>
-           <Equipe nome="Ronaldo" cargo="Desenvolvedor" idade="19"/>
-           <Equipe nome="Thiago" cargo="Designer" idade="19"/>
-       </div>
-    );
-}
+    <div>
+     <h3>Contador</h3>
+     <button onClick={this.diminuir}>-</button>
+      {this.state.contador}
+      <button onClick={this.aumentar}>+</button>
 
+    </div>
+        );    
+    }
+
+}
 export default App;
