@@ -1,57 +1,61 @@
 import React, { Component } from 'react';
+import './estilo.css'
 
 class App extends Component{
     constructor(props){
         super(props);
         this.state = {
-            email: "email@email.com",
-            password: '',
-            Sexo: ''
-           
-        }
-        this.trocaEmail = this.trocaEmail.bind(this);
+            textoInicial: ''
+        };
+
+        this.quebraBiscoito = this.quebraBiscoito.bind(this);
+
         
-       
-        }
+        this.frases = ['Sua luta não termina quando sentir cansaço, mas sim quando atingir o sucesso tão merecido.',
+                        'Os princípios mais importantes podem e devem ser inflexíveis.',
+                        'Ninguém é suficientemente competente para governar outra pessoa sem o seu consentimento.',
+                        'Só tem o direito de criticar aquele que pretende ajudar.',
+                        'Quando pratico o bem, sinto-me bem; quando pratico o mal, sinto-me mal. Eis a minha religião.',    
+                        'SE EU TIVESSE 8 HORAS PARA CORTAR UMA ÁRVORE, GASTARIA SEIS AFIANDO MEU MACHADO', ];
+    
+        
+        
+    
+    }
 
-        trocaEmail(e){
-            let valorDigitado = e.target.value;
-            this.setState({email: valorDigitado});
-        }
+    quebraBiscoito(){
+        let state = this.state;
+        let numeroAleatorio = Math.floor(Math.random() * this.frases.length);
+        state.textoInicial = this.frases[numeroAleatorio];
+        this.setState(state);
+    }
 
+        
+        
 
 render(){
     return(
-           
-        <div>
-         <h2>Login</h2>
-            <h3>Digite seu email:</h3>
-            <input type='email' name='email' value={this.state.email}  
-            onChange={this.trocaEmail}  />
-           
-            <h3>Digite sua senha:</h3>
-            <input type='password' name='password' value={this.state.password}
-            onChange={(e) => this.setState({password: e.target.value})} />
-        
-       <h3>Sexo:</h3>
-       <select>
-           <option value="Masculino">Masculino</option>
-           <option value="Feminino">Feminino</option>
-           <option value="outro">Outros</option>
-       </select>
+        <div className="container">
+            <img src={require('./assets/biscoito.png')} className="img" />
+            <Botao nome="Abrir Biscoito" acaoBtn={this.quebraBiscoito}/>
+            <h3 className='textoInicial'>{this.state.textoInicial}</h3>
+            
+        </div>
 
-       <div>
-    <h2>{this.state.email}
-        {this.state.password}
-        {this.state.Sexo}
-    </h2>
-
-       </div>
-       </div>
-       
         );
-    }     
+      }     
 }
-   
-        
+ 
+class Botao extends Component{
+
+    render(){
+        return(
+            <div>
+                <button onClick={this.props.acaoBtn}>{this.props.nome}</button>
+            </div>
+        );
+    }
+}
+
+
 export default App;
