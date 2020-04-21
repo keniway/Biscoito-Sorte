@@ -1,40 +1,54 @@
 import React, { Component } from 'react';
-import Feed from './component/Feed/index';
-
 
 class App extends Component{
     constructor(props){
         super(props);
         this.state = {
-            feed: [
-                {id: 1, username: 'Ronaldo', curtidas: 10, comentarios: 17},
-                {id: 2, username: 'Ana Fravia', curtidas: 20, comentarios: 16},
-                {id: 3, username: 'Malu porno', curtidas: 5, comentarios: 15},
-                {id: 4, username: 'Mauricio Noia', curtidas: 1, comentarios: 14},
-                {id: 5, username: 'biel gay', curtidas: 8, comentarios: 13},
-                {id: 6, username: 'predo emo', curtidas: 3, comentarios: 1},
-
-            ],
-            status: true
-        };
+            email: "email@email.com",
+            password: '',
+            Sexo: ''
+           
+        }
+        this.trocaEmail = this.trocaEmail.bind(this);
         
-    }
-    
- 
+       
+        }
+
+        trocaEmail(e){
+            let valorDigitado = e.target.value;
+            this.setState({email: valorDigitado});
+        }
+
+
 render(){
     return(
-        
-            
-        
+           
         <div>
-        {this.state.feed.map((item)=>{
-            return(
-                <Feed key={item.id} username={item.username} 
-                comentarios={item.comentarios} curtidas={item.curtidas}/>
-            );
-        })}
-        </div>
+         <h2>Login</h2>
+            <h3>Digite seu email:</h3>
+            <input type='email' name='email' value={this.state.email}  
+            onChange={this.trocaEmail}  />
+           
+            <h3>Digite sua senha:</h3>
+            <input type='password' name='password' value={this.state.password}
+            onChange={(e) => this.setState({password: e.target.value})} />
         
+       <h3>Sexo:</h3>
+       <select>
+           <option value="Masculino">Masculino</option>
+           <option value="Feminino">Feminino</option>
+           <option value="outro">Outros</option>
+       </select>
+
+       <div>
+    <h2>{this.state.email}
+        {this.state.password}
+        {this.state.Sexo}
+    </h2>
+
+       </div>
+       </div>
+       
         );
     }     
 }
